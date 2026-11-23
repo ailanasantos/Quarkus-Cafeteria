@@ -56,16 +56,18 @@ public class CafeServicelmpl implements CafeService {
     }
 
     @Override
+    @Transactional
     public CafeResponseDTO update(Long id, CafeDTO cafeDTO) {
-       
+
        validar(cafeDTO);
 
-       Cafe entity = new Cafe();
+       Cafe entity = cafeRepository.findById(id);
+       if (entity == null)
+           throw new NotFoundException("Cafe não encontrado.");
+
        entity.setSabor(cafeDTO.sabor());
        entity.setQuantidade(cafeDTO.quantidade());
        entity.setTemperatura(cafeDTO.temperatura());
-
-       cafeRepository.persist(entity);
 
        return CafeResponseDTO.valueOf(entity);
     }

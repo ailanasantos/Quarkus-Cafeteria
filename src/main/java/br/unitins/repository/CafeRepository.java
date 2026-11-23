@@ -12,7 +12,7 @@ public class CafeRepository implements PanacheRepository<Cafe> {
     public List<Cafe> findByNome(String nome){
         if (nome == null)
             return null;
-        return find("UPPER(nome) LIKE ?1 ", "%"+nome.toUpperCase()+"%").list();
+        return find("UPPER(sabor) LIKE ?1 ", "%"+nome.toUpperCase()+"%").list();
     }
 
 }
